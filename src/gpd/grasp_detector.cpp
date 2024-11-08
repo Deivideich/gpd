@@ -545,6 +545,7 @@ GraspDetector::pruneGraspCandidates(
     if (scores[i] > min_score) {
       hands[i]->setScore(scores[i]);
       hands_out.push_back(std::move(hands[i]));
+      hands_out[i]->print();
     }
   }
 
