@@ -269,6 +269,7 @@ std::vector<std::unique_ptr<candidate::Hand>> GraspDetector::detectGrasps(
   std::vector<float> scores = classifier_->classifyImages(images);
   for (int i = 0; i < hands.size(); i++) {
     hands[i]->setScore(scores[i]);
+    hands[i]->print();
   }
   double t_classify = omp_get_wtime() - t0_classify;
 
