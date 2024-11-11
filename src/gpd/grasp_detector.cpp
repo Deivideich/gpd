@@ -269,7 +269,6 @@ std::vector<std::unique_ptr<candidate::Hand>> GraspDetector::detectGrasps(
   std::vector<float> scores = classifier_->classifyImages(images);
   for (int i = 0; i < hands.size(); i++) {
     hands[i]->setScore(scores[i]);
-    hands[i]->print();
   }
   double t_classify = omp_get_wtime() - t0_classify;
 
@@ -415,6 +414,7 @@ std::vector<std::unique_ptr<candidate::Hand>> GraspDetector::selectGrasps(
   for (int i = 0; i < middle; i++) {
     hands_out.push_back(std::move(hands[i]));
     printf(" grasp #%d, score: %3.4f\n", i, hands_out[i]->getScore());
+    hands_out[i]->print();
   }
 
   return hands_out;
@@ -546,7 +546,6 @@ GraspDetector::pruneGraspCandidates(
     if (scores[i] > min_score) {
       hands[i]->setScore(scores[i]);
       hands_out.push_back(std::move(hands[i]));
-      hands_out[i]->print();
     }
   }
 
